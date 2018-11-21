@@ -1,6 +1,5 @@
 package com.zmm.diary.ui.activity;
 
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -18,13 +17,11 @@ import com.zmm.diary.mvp.presenter.RegisterPresenter;
 import com.zmm.diary.mvp.presenter.contract.RegisterContract;
 import com.zmm.diary.ui.widget.TitleBar;
 import com.zmm.diary.utils.ToastUtils;
-import com.zmm.diary.utils.UIUtils;
 import com.zmm.diary.utils.VerificationUtils;
 
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -86,10 +83,6 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
 
     private void initToolBar() {
-        //这里一定要加上，否则menu不显示
-        setSupportActionBar(mTitleBar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
 
         if (mParam == 1) {
             mTitle = "注册";
@@ -103,16 +96,16 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
         System.out.println("mTitle = " + mTitle);
 
         mBtnConfirm.setText(mTitle);
-        mTitleBar.setCenterTitle(mTitle);
 
-        mTitleBar.setNavigationIcon(UIUtils.getResources().getDrawable(R.mipmap.back));
-        mTitleBar.setNavigationOnClickListener(new View.OnClickListener() {
+        mTitleBar.setTitle(mTitle);
+        mTitleBar.setLeftImageResource(R.drawable.back);
+        mTitleBar.setLeftText("返回");
+        mTitleBar.setLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(LoginActivity.class,true);
             }
         });
-
     }
 
 
